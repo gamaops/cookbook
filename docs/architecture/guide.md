@@ -8,7 +8,7 @@ First you need to have a background knowledge over the following keywords:
 * [SCS](https://scs-architecture.org/)
 * Pub/Sub, queuing, messaging, RPC and distributed computing in general
 
-Every application on GamaOps is built using the architectures explained above and the services topology reflect the hexagonal architecture where there are two distinct kinds of backends: **internal services** and **edge APIs**.
+Every application on GamaOps is built using the architectures explained above and the services topology reflects the hexagonal architecture where there are two distinct kinds of backends: **internal services** and **edge APIs**.
 
 ![cqrs](../assets/images/cqrs-architecture.png)
 

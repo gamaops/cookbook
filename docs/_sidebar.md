@@ -9,8 +9,16 @@
 
    - [Architecture Guide](architecture/guide.md)
 
-- Operations
+- Engineering
+
+   - [NodeJS Application](engineering/nodejs-application.md)
 
 - Standards
 
    - [Security](standards/security.md)
+   - [Logging](standards/logging.md)
+   - [Fields & Data](standards/fields-and-data.md)
+
+- Systems
+
+   - [Registry](systems/registry/README.md)
