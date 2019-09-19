@@ -20,6 +20,7 @@
    - [Logging](standards/logging.md)
    - [Fields & Data](standards/fields-and-data.md)
    - [CI/CD](standards/ci-cd.md)
+   - [gRPC](standards/grpc.md)
 
 - Systems
 
