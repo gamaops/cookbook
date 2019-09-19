@@ -16,9 +16,13 @@
       name: 'GamaOps Cookbook',
       repo: '',
       loadSidebar: true,
-      maxLevel: 2,
+      maxLevel: 1,
       subMaxLevel: 2,
       themeColor: '#f51cbc',
+      logo: 'assets/images/gamaops-small-logo.png',
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
       search: {
         maxAge: 86400000,
         paths: 'auto',
@@ -52,5 +56,6 @@
   <script src="//unpkg.com/docsify/lib/plugins/emoji.min.js"></script>
   <script src="//unpkg.com/docsify-copy-code"></script>
   <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
+  <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
 </body>
 </html>
