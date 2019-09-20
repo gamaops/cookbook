@@ -1,6 +1,6 @@
 # Registry System
 
-The registry system deals with: authentication, authorization and auditing. This is our identity provider system and is compound of the following microservices:
+The registry system deals with: authentication, authorization and auditing. This is our identity provider system and consists of the following microservices:
 
 ## Current Version
 

@@ -127,3 +127,64 @@ You'll now have the following endpoints:
 * Elasticsearch - http://elasticsearch.docker.local:9200
 * Redis - redis.docker.local:6379
 * MongoDB - mongo.docker.local:27017
+
+## Envoy
+
+To run Envoy to act as proxy to gRPC-Web you need to follow these steps:
+
+1. Get the Docker network gateway using the command: `ip route show | grep docker0`
+  1. Example: in the line `172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1` the **172.17.0.1** is the gateway
+2. Now you need to create an **envoy.yaml** file:
+  ```yaml
+  admin:
+    access_log_path: /tmp/admin_access.log
+    address:
+      socket_address: { address: 0.0.0.0, port_value: 9901 }
+
+  static_resources:
+    listeners:
+    - name: listener_0
+      address:
+        socket_address: { address: 0.0.0.0, port_value: 5050 }
+      filter_chains:
+      - filters:
+        - name: envoy.http_connection_manager
+          config:
+            codec_type: auto
+            stat_prefix: ingress_http
+            route_config:
+              name: local_route
+              virtual_hosts:
+              - name: local_service
+                domains: ["*"]
+                routes:
+                - match: { prefix: "/identity." }
+                  route:
+                    cluster: identity_api
+                    max_grpc_timeout: 0s
+                cors:
+                  allow_origin:
+                  - "*"
+                  allow_methods: GET, PUT, DELETE, POST, OPTIONS
+                  allow_headers: keep-alive,user-agent,cache-control,content-type,content-transfer-encoding,custom-header-1,x-accept-content-transfer-encoding,x-accept-response-streaming,x-user-agent,x-grpc-web,grpc-timeout
+                  max_age: "1728000"
+                  expose_headers: custom-header-1,grpc-status,grpc-message
+            http_filters:
+            - name: envoy.grpc_web
+            - name: envoy.cors
+            - name: envoy.router
+    clusters:
+    - name: identity_api
+      connect_timeout: 0.25s
+      type: logical_dns
+      http2_protocol_options: {}
+      lb_policy: round_robin
+      # win/mac hosts: Use address: host.docker.internal instead of address: localhost in the line below
+      hosts: [{ socket_address: { address: '172.17.0.1', port_value: 35102 }}]
+  ```
+3. Now you can run Envoy:
+  ```bash
+  docker run -d -p 5050:5050 --rm \
+  -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml \
+  envoyproxy/envoy:latest /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
+  ```
