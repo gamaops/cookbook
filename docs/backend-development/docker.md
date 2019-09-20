@@ -134,7 +134,7 @@ To run Envoy to act as proxy to gRPC-Web you need to follow these steps:
 
 1. Get the Docker network gateway using the command: `ip route show | grep docker0`
   1. Example: in the line `172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1` the **172.17.0.1** is the gateway
-2. Now you need to create an **envoy.yaml** file:
+2. Now you need to create an **envoy.yaml** file (don't forget to replace the gateway IP in upstreams):
   ```yaml
   admin:
     access_log_path: /tmp/admin_access.log
@@ -184,7 +184,8 @@ To run Envoy to act as proxy to gRPC-Web you need to follow these steps:
   ```
 3. Now you can run Envoy:
   ```bash
-  docker run -d -p 5050:5050 --rm \
+  docker run -d -p 5050:5050 --rm --name=envoy \
   -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml \
   envoyproxy/envoy:latest /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
   ```
+4. An if you want to change the configuration file (add more APIs for example) you can edit the configuration file and execute: `docker restart envoy` to reload Envoy
