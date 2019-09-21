@@ -12,3 +12,7 @@ This page covers all you need to know about the runtime environment for NodeJS b
    1. To view the dashboard: `pm2 dash`
    2. To view logs: `pm2 logs`
    3. To view pretty logs: `pm2 logs --raw | node_modules/.bin/bunyan`
+
+## Docker
+
+1. Read the best practices guide to dockerize NodeJS applications: https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md

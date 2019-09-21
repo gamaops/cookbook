@@ -188,4 +188,4 @@ To run Envoy to act as proxy to gRPC-Web you need to follow these steps:
   -v $(pwd)/envoy.yaml:/etc/envoy/envoy.yaml \
   envoyproxy/envoy:latest /usr/local/bin/envoy -c /etc/envoy/envoy.yaml
   ```
-4. An if you want to change the configuration file (add more APIs for example) you can edit the configuration file and execute: `docker restart envoy` to reload Envoy
+4. And if you want to change the configuration file (add more APIs for example) you can edit the configuration file and execute: `docker restart envoy` to reload Envoy
