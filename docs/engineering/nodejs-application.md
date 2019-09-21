@@ -29,6 +29,20 @@ The [backend framework](https://github.com/gamaops/backend-framework) repository
 
 Proto definitions, database schemas, mappings and JSON Schemas go here, the main point to create a [definitions](https://github.com/gamaops/definitions) repository is to have a central place where everyone agrees about data structure.
 
+#### Setup Elasticsearch Indexes
+
+You can use the definitions repository to setup Elasticsearch indexes settings:
+
+1. Create a JSON file (`elastic.json`) file with the Elasticsearch client options:
+   ```json
+   {
+      "node": "http://elasticsearch.docker.local:9200/",
+      "requestTimeout": 60000
+   }
+   ```
+2. Export a variable with which environment you want to setup: `export ENVIRONMENT=development`
+3. Execute the setup script: `npm run setup:elastic -- ./elastic.json`
+
 ## CI/CD
 
 Our stack to build pipelines is:
