@@ -4,9 +4,10 @@ The registry system deals with: authentication, authorization and auditing. This
 
 ## Current Version
 
-Microservice | Version | gRPC Port | Metrics Port
--------------|---------|-----------|-------------
-Identity API | v1      | 35102     | 32004
+Microservice     | Version | gRPC Port | Metrics Port
+-----------------|---------|-----------|-------------
+Identity API     | v1      | 35102     | 32004
+Identity Service | v1      | -         | 32001
 
 ## Index
 
